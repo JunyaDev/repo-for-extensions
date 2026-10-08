@@ -1,0 +1,236 @@
+{
+  "extName": {
+    "message": "Form Filler – Test Data"
+  },
+  "extDescription": {
+    "message": "Fills forms with realistic test data based on each field's label and name. Italian and English."
+  },
+  "cmdFillPage": {
+    "message": "Fill all fields on the page"
+  },
+  "cmdFillForm": {
+    "message": "Fill the focused form"
+  },
+  "cmdClearPage": {
+    "message": "Clear all fields on the page"
+  },
+  "menuFillPage": {
+    "message": "Fill all fields on this page"
+  },
+  "menuFillForm": {
+    "message": "Fill this form"
+  },
+  "menuFillField": {
+    "message": "Fill this field"
+  },
+  "menuClearForm": {
+    "message": "Clear this form"
+  },
+  "popupFillPage": {
+    "message": "Fill page"
+  },
+  "popupFillForm": {
+    "message": "Focused form"
+  },
+  "popupClear": {
+    "message": "Clear"
+  },
+  "popupNewIdentity": {
+    "message": "New identity"
+  },
+  "popupKeepIdentity": {
+    "message": "Keep same identity (multi-step forms)"
+  },
+  "popupDataLanguage": {
+    "message": "Data language"
+  },
+  "popupAuto": {
+    "message": "Auto"
+  },
+  "popupFilled": {
+    "message": "Filled $1 of $2 fields"
+  },
+  "popupCleared": {
+    "message": "Cleared $1 fields"
+  },
+  "popupFrames": {
+    "message": "$1 frames"
+  },
+  "popupNoFields": {
+    "message": "No fillable fields found"
+  },
+  "popupError": {
+    "message": "Can't run on this page"
+  },
+  "popupIdentity": {
+    "message": "Current identity"
+  },
+  "popupNoIdentity": {
+    "message": "Fill a page to generate an identity."
+  },
+  "popupCopyHint": {
+    "message": "Click a value to copy it"
+  },
+  "popupCopied": {
+    "message": "Copied"
+  },
+  "popupOptions": {
+    "message": "Options"
+  },
+  "popupShortcuts": {
+    "message": "Shortcuts"
+  },
+  "idName": {
+    "message": "Name"
+  },
+  "idEmail": {
+    "message": "Email"
+  },
+  "idUsername": {
+    "message": "Username"
+  },
+  "idPassword": {
+    "message": "Password"
+  },
+  "idPhone": {
+    "message": "Phone"
+  },
+  "idAddress": {
+    "message": "Address"
+  },
+  "idBirthDate": {
+    "message": "Birth date"
+  },
+  "idCompany": {
+    "message": "Company"
+  },
+  "idCf": {
+    "message": "Codice fiscale"
+  },
+  "idPiva": {
+    "message": "Partita IVA"
+  },
+  "idIban": {
+    "message": "IBAN"
+  },
+  "idCard": {
+    "message": "Test card"
+  },
+  "localeIt": {
+    "message": "Italian"
+  },
+  "localeEnUS": {
+    "message": "English (US)"
+  },
+  "localeEnGB": {
+    "message": "English (UK)"
+  },
+  "optTitle": {
+    "message": "Form Filler options"
+  },
+  "optSaved": {
+    "message": "Saved"
+  },
+  "optSecData": {
+    "message": "Generated data"
+  },
+  "optLocale": {
+    "message": "Data language"
+  },
+  "optLocaleHelp": {
+    "message": "\"Auto\" uses the page language (lang attribute, domain and visible text)."
+  },
+  "optLocaleAuto": {
+    "message": "Auto-detect"
+  },
+  "optFallback": {
+    "message": "When the language can't be detected"
+  },
+  "optFallbackBrowser": {
+    "message": "Browser language"
+  },
+  "optEmailTemplate": {
+    "message": "Email template"
+  },
+  "optEmailTemplateHelp": {
+    "message": "Placeholders: {first} {last} {initial} {n} (2 digits) {rand} (5 chars) {ts} (timestamp). Example: me+{rand}@yourdomain.com"
+  },
+  "optPassword": {
+    "message": "Fixed password"
+  },
+  "optPasswordHelp": {
+    "message": "Leave empty to generate a strong random password (shown in the popup)."
+  },
+  "optKeepIdentity": {
+    "message": "Keep the same identity between fills (multi-step forms)"
+  },
+  "optSecBehaviour": {
+    "message": "Behaviour"
+  },
+  "optOverwrite": {
+    "message": "Overwrite fields that already have a value"
+  },
+  "optIncludeHidden": {
+    "message": "Also fill invisible fields (may trigger honeypots)"
+  },
+  "optCheckboxes": {
+    "message": "Checkboxes"
+  },
+  "optCheckboxAll": {
+    "message": "Check all"
+  },
+  "optCheckboxRequired": {
+    "message": "Only required and consent/privacy boxes"
+  },
+  "optCheckboxRandom": {
+    "message": "Random (required and consent always checked)"
+  },
+  "optAttachFiles": {
+    "message": "Attach a sample file to file inputs (PNG/JPG/GIF/PDF/TXT… based on \"accept\")"
+  },
+  "optContentEditable": {
+    "message": "Fill rich-text editors (contenteditable)"
+  },
+  "optHighlight": {
+    "message": "Highlight filled fields (green = recognised, orange = generic, blue = custom rule)"
+  },
+  "optDebug": {
+    "message": "Log detected field types to the page console"
+  },
+  "optSecRules": {
+    "message": "Custom rules"
+  },
+  "optRulesHelp": {
+    "message": "One rule per line: regex = value. The regex is tested (case-insensitive) against the field's label, name, id and placeholder. Values can use {firstName} {lastName} {fullName} {email} {phone} {username} {password} {city} {cap} {street} {company} {cf} {piva} {iban} {today} {n} {rand}. Use {skip} to leave a field alone, true/false for checkboxes. Lines starting with # are comments."
+  },
+  "optReset": {
+    "message": "Reset to defaults"
+  },
+  "optResetConfirm": {
+    "message": "Reset all options to their defaults?"
+  },
+  "optShortcuts": {
+    "message": "Keyboard shortcuts"
+  },
+  "optShortcutsHelp": {
+    "message": "Alt+Shift+F fills the page, Alt+Shift+E fills the focused form. Change them in chrome://extensions/shortcuts (Firefox: Add-ons → ⚙ → Manage Extension Shortcuts)."
+  },
+  "popupNoFocus": {
+    "message": "Click into a form field on the page first"
+  },
+  "idPin": {
+    "message": "PIN"
+  },
+  "idMemorable": {
+    "message": "Memorable word"
+  },
+  "idBeneficiary": {
+    "message": "Beneficiary"
+  },
+  "idBeneficiaryIban": {
+    "message": "Beneficiary IBAN"
+  },
+  "optSimulateTyping": {
+    "message": "Simulate real typing (key events per character) for masked or guarded inputs, e.g. banking sites. Fields that reject a direct value are always retried this way."
+  }
+}

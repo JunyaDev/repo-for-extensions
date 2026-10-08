@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form Filler – banking test page</title>
+  <style>
+    body { font: 14px/1.4 system-ui, sans-serif; max-width: 900px; margin: 20px auto; padding: 0 16px; }
+    form { border: 1px solid #ccc; border-radius: 8px; padding: 12px 16px; margin: 16px 0; }
+    .row { margin: 6px 0; }
+    .row > label:first-child { display: inline-block; min-width: 260px; }
+    .split input { width: 3.5em; }
+    .keypad { display: inline-grid; grid-template-columns: repeat(5, 36px); gap: 4px; vertical-align: middle; }
+    .keypad button { height: 32px; }
+  </style>
+</head>
+<body>
+<h1>Form Filler – banking test page</h1>
+
+<!-- 1. Bonifico SEPA with sender / beneficiary sections, split OTP, guarded input -->
+<form id="bonifico">
+  <h2>Bonifico SEPA</h2>
+  <h3>Ordinante</h3>
+  <div class="row"><label for="int">Intestatario del conto</label><input id="int" name="intestatario"></div>
+  <div class="row"><label for="ibanA">IBAN di addebito</label><input id="ibanA" name="iban_addebito"></div>
+  <h3>Beneficiario</h3>
+  <div class="row"><label for="bn">Nome e cognome</label><input id="bn" name="ben_nome"></div>
+  <div class="row"><label for="bi">IBAN</label><input id="bi" name="ben_iban"></div>
+  <div class="row"><label for="bb">BIC / SWIFT</label><input id="bb" name="ben_bic"></div>
+  <div class="row"><label for="bk">Banca</label><input id="bk" name="ben_banca"></div>
+  <h3>Dati del pagamento</h3>
+  <div class="row"><label for="imp">Importo (€)</label><input id="imp" name="importo" placeholder="0,00"></div>
+  <div class="row"><label for="caus">Causale</label><input id="caus" name="causale" maxlength="140"></div>
+  <div class="row"><label for="dex">Data esecuzione</label><input id="dex" name="data_esecuzione" type="date"></div>
+  <div class="row"><label for="val">Valuta</label><select id="val" name="valuta"><option value="">--</option><option>USD</option><option>EUR</option><option>GBP</option></select></div>
+  <div class="row"><label for="gd">Cellulare per notifiche</label><input id="gd" name="cell_notifiche" type="tel"></div>
+  <div class="row split"><label for="o1">Codice OTP</label>
+    <input id="o1" name="otp1" maxlength="1" inputmode="numeric"><input name="otp2" maxlength="1" aria-label="Cifra 2"><input name="otp3" maxlength="1" aria-label="Cifra 3"><input name="otp4" maxlength="1" aria-label="Cifra 4"><input name="otp5" maxlength="1" aria-label="Cifra 5"><input name="otp6" maxlength="1" aria-label="Cifra 6">
+  </div>
+</form>
+
+<!-- 2. Italian bank coordinates in separate fields -->
+<form id="coordinate">
+  <h2>Coordinate bancarie</h2>
+  <div class="row"><label for="abi">ABI</label><input id="abi" name="abi" maxlength="5"></div>
+  <div class="row"><label for="cab">CAB</label><input id="cab" name="cab" maxlength="5"></div>
+  <div class="row"><label for="cin">CIN</label><input id="cin" name="cin" maxlength="1"></div>
+  <div class="row"><label for="ncc">Numero conto corrente</label><input id="ncc" name="conto" maxlength="12"></div>
+  <div class="row"><label for="ib2">IBAN (controllo)</label><input id="ib2" name="iban_check"></div>
+</form>
+
+<!-- 3. pagoPA / bollettino / CBILL / F24 -->
+<form id="pagamenti">
+  <h2>Pagamenti</h2>
+  <div class="row"><label for="avv">Codice avviso pagoPA</label><input id="avv" name="codice_avviso" maxlength="18"></div>
+  <div class="row"><label for="ente">Codice fiscale ente creditore</label><input id="ente" name="cf_ente" maxlength="11"></div>
+  <div class="row"><label for="ccp">Conto corrente postale</label><input id="ccp" name="ccp" maxlength="12"></div>
+  <div class="row"><label for="nb">Numero bollettino</label><input id="nb" name="num_bollettino" maxlength="18"></div>
+  <div class="row"><label for="cbill">Codice CBILL</label><input id="cbill" name="cbill" maxlength="5"></div>
+  <div class="row"><label for="trib">Codice tributo</label><input id="trib" name="tributo" maxlength="4"></div>
+  <div class="row"><label for="arif">Anno di riferimento</label><input id="arif" name="anno_rif" maxlength="4"></div>
+  <div class="row"><label for="rat">Rateazione / mese rif.</label><input id="rat" name="rateazione" maxlength="4"></div>
+  <div class="row"><label for="cent">Codice ente/comune</label><input id="cent" name="cod_ente" maxlength="4"></div>
+  <div class="row"><label for="deb">Importo a debito</label><input id="deb" name="importo_debito"></div>
+  <div class="row"><label for="mand">Codice identificativo mandato SEPA</label><input id="mand" name="mandato"></div>
+  <div class="row"><label for="cid">Identificativo del creditore</label><input id="cid" name="creditor_id"></div>
+</form>
+
+<!-- 4. Mortgage application -->
+<form id="mutuo">
+  <h2>Richiesta mutuo</h2>
+  <div class="row"><label for="imu">Importo del mutuo</label><input id="imu" name="importo_mutuo" type="number" min="50000" max="1000000" step="1000"></div>
+  <div class="row"><label for="vim">Valore dell'immobile</label><input id="vim" name="valore_immobile"></div>
+  <div class="row"><label for="ant">Anticipo</label><input id="ant" name="anticipo"></div>
+  <div class="row"><label for="dur">Durata del mutuo (anni)</label><select id="dur" name="durata"><option value="">Seleziona</option><option>10 anni</option><option>15 anni</option><option>20 anni</option><option>25 anni</option><option>30 anni</option></select></div>
+  <div class="row"><label for="tas">Tasso (%)</label><input id="tas" name="tasso"></div>
+  <div class="row"><label for="rat2">Rata mensile</label><input id="rat2" name="rata"></div>
+  <div class="row"><label for="fin">Finalità</label><select id="fin" name="finalita"><option value="">Seleziona</option><option>Acquisto prima casa</option><option>Acquisto seconda casa</option><option>Surroga</option></select></div>
+  <div class="row"><label for="rnm">Reddito netto mensile</label><input id="rnm" name="reddito_mensile"></div>
+  <div class="row"><label for="rann">Reddito annuo lordo</label><select id="rann" name="reddito_annuo"><option value="">Seleziona</option><option>Fino a 15.000 €</option><option>15.000 - 30.000 €</option><option>30.000 - 50.000 €</option><option>Oltre 50.000 €</option></select></div>
+  <div class="row"><label for="car">Persone a carico</label><input id="car" name="a_carico" type="number" min="0" max="10"></div>
+  <div class="row"><label for="anz">Da quanti anni lavori presso l'attuale datore di lavoro?</label><input id="anz" name="anzianita" type="number"></div>
+</form>
+
+<!-- 5. KYC / adeguata verifica -->
+<form id="kyc">
+  <h2>Adeguata verifica</h2>
+  <div class="row" role="radiogroup" aria-label="Sei una persona politicamente esposta (PEP)?">Sei una persona politicamente esposta (PEP)?
+    <label><input type="radio" name="pep" value="S"> Sì</label> <label><input type="radio" name="pep" value="N"> No</label>
+  </div>
+  <div class="row">Sei cittadino statunitense o residente fiscale negli USA?
+    <label><input type="radio" name="fatca" value="1"> Sì</label> <label><input type="radio" name="fatca" value="0"> No</label>
+  </div>
+  <div class="row"><label><input type="checkbox" name="non_pep"> Dichiaro di non essere una persona politicamente esposta</label></div>
+  <div class="row"><label><input type="checkbox" name="is_pep"> Sono una persona politicamente esposta</label></div>
+  <div class="row"><label for="ff">Fonte dei fondi</label><select id="ff" name="fonte_fondi"><option value="">Seleziona</option><option>Eredità</option><option>Pensione</option><option>Reddito da lavoro dipendente</option><option>Vincite</option></select></div>
+  <div class="row"><label for="sc">Scopo del rapporto</label><select id="sc" name="scopo"><option value="">Seleziona</option><option>Investimenti</option><option>Attività commerciale</option><option>Accredito stipendio</option></select></div>
+  <div class="row"><label for="cp">Condizione professionale</label><select id="cp" name="condizione"><option value="">Seleziona</option><option>Autonomo</option><option>Pensionato</option><option>Dipendente a tempo indeterminato</option><option>Disoccupato</option></select></div>
+  <div class="row"><label for="rf">Residenza fiscale</label><select id="rf" name="residenza_fiscale"><option value="">Seleziona</option><option>Francia</option><option>Italia</option><option>Stati Uniti</option></select></div>
+  <div class="row"><label for="tc">Tipo di conto</label><select id="tc" name="tipo_conto"><option value="">Seleziona</option><option>Conto deposito</option><option>Conto titoli</option><option>Conto corrente</option></select></div>
+  <div class="row"><label for="mm">Cognome da nubile della madre</label><input id="mm" name="madre"></div>
+  <div class="row"><label for="dq">Domanda di sicurezza</label><select id="dq" name="domanda"><option value="">Seleziona</option><option>Qual è il nome del tuo primo animale domestico?</option><option>In che città sei nato?</option></select></div>
+  <div class="row"><label for="ra">Risposta di sicurezza</label><input id="ra" name="risposta"></div>
+</form>
+
+<!-- 6. Login with on-screen keypad -->
+<form id="login">
+  <h2>Accesso</h2>
+  <div class="row"><label for="cc">Codice cliente</label><input id="cc" name="codice_cliente"></div>
+  <div class="row"><label for="pin">PIN</label><input id="pin" name="pin" type="password" readonly>
+    <div class="keypad" id="keypad"></div>
+  </div>
+</form>
+
+<!-- 7. UK payee + memorable characters + split card -->
+<form id="uk" lang="en-GB">
+  <h2>Pay someone new (UK)</h2>
+  <h3>Payee details</h3>
+  <div class="row"><label for="ahn">Account holder name</label><input id="ahn" name="payee_name"></div>
+  <div class="row split"><label for="sc1">Sort code</label><input id="sc1" name="sc1" maxlength="2"> - <input name="sc2" maxlength="2" aria-label="Sort code part 2"> - <input name="sc3" maxlength="2" aria-label="Sort code part 3"></div>
+  <div class="row"><label for="uan">Account number</label><input id="uan" name="account_number" maxlength="8"></div>
+  <div class="row"><label for="pref">Payment reference</label><input id="pref" name="reference" maxlength="18"></div>
+  <div class="row"><label for="uam">Amount</label><input id="uam" name="amount" placeholder="0.00"></div>
+  <h3>Security</h3>
+  <div class="row"><label for="m2">2nd character of your memorable information</label><select id="m2" name="mem2"></select></div>
+  <div class="row"><label for="m5">5th character of your memorable information</label><select id="m5" name="mem5"></select></div>
+  <div class="row"><label for="m7">7th character of your memorable information</label><select id="m7" name="mem7"></select></div>
+  <h3>Card</h3>
+  <div class="row split"><label for="c1">Card number</label><input id="c1" name="cn1" maxlength="4"><input name="cn2" maxlength="4" aria-label="Card number part 2"><input name="cn3" maxlength="4" aria-label="Card number part 3"><input name="cn4" maxlength="4" aria-label="Card number part 4"></div>
+</form>
+
+<script>
+  // Scrambled PIN keypad that appends digits to the read-only PIN field.
+  const pad = document.getElementById('keypad');
+  for (const d of ['7', '3', '0', '9', '1', '5', '8', '2', '6', '4']) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = d;
+    b.addEventListener('click', () => { document.getElementById('pin').value += d; });
+    pad.append(b);
+  }
+  // Letter/digit selects for "memorable information" characters.
+  for (const id of ['m2', 'm5', 'm7']) {
+    const s = document.getElementById(id);
+    s.add(new Option('-', ''));
+    for (const ch of 'abcdefghijklmnopqrstuvwxyz0123456789') s.add(new Option(ch, ch));
+  }
+  // Anti-automation guard: values that don't come from a keystroke are wiped.
+  const guarded = document.getElementById('gd');
+  let lastKey = 0;
+  guarded.addEventListener('keydown', () => { lastKey = Date.now(); });
+  guarded.addEventListener('input', () => { if (Date.now() - lastKey > 100) guarded.value = ''; });
+</script>
+
+<pre id="ff-results" hidden></pre>
+<script src="harness.js"></script>
+</body>
+</html>

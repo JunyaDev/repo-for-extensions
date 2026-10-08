@@ -1,0 +1,236 @@
+{
+  "extName": {
+    "message": "Form Filler – Dati di test"
+  },
+  "extDescription": {
+    "message": "Compila i moduli con dati di test realistici in base a etichetta e nome dei campi. Italiano e inglese."
+  },
+  "cmdFillPage": {
+    "message": "Compila tutti i campi della pagina"
+  },
+  "cmdFillForm": {
+    "message": "Compila il modulo attivo"
+  },
+  "cmdClearPage": {
+    "message": "Svuota tutti i campi della pagina"
+  },
+  "menuFillPage": {
+    "message": "Compila tutti i campi della pagina"
+  },
+  "menuFillForm": {
+    "message": "Compila questo modulo"
+  },
+  "menuFillField": {
+    "message": "Compila questo campo"
+  },
+  "menuClearForm": {
+    "message": "Svuota questo modulo"
+  },
+  "popupFillPage": {
+    "message": "Compila pagina"
+  },
+  "popupFillForm": {
+    "message": "Modulo attivo"
+  },
+  "popupClear": {
+    "message": "Svuota"
+  },
+  "popupNewIdentity": {
+    "message": "Nuova identità"
+  },
+  "popupKeepIdentity": {
+    "message": "Mantieni la stessa identità (moduli a più passaggi)"
+  },
+  "popupDataLanguage": {
+    "message": "Lingua dei dati"
+  },
+  "popupAuto": {
+    "message": "Auto"
+  },
+  "popupFilled": {
+    "message": "Compilati $1 campi su $2"
+  },
+  "popupCleared": {
+    "message": "Svuotati $1 campi"
+  },
+  "popupFrames": {
+    "message": "$1 frame"
+  },
+  "popupNoFields": {
+    "message": "Nessun campo compilabile trovato"
+  },
+  "popupError": {
+    "message": "Impossibile eseguire su questa pagina"
+  },
+  "popupIdentity": {
+    "message": "Identità corrente"
+  },
+  "popupNoIdentity": {
+    "message": "Compila una pagina per generare un'identità."
+  },
+  "popupCopyHint": {
+    "message": "Clicca un valore per copiarlo"
+  },
+  "popupCopied": {
+    "message": "Copiato"
+  },
+  "popupOptions": {
+    "message": "Opzioni"
+  },
+  "popupShortcuts": {
+    "message": "Scorciatoie"
+  },
+  "idName": {
+    "message": "Nome"
+  },
+  "idEmail": {
+    "message": "Email"
+  },
+  "idUsername": {
+    "message": "Username"
+  },
+  "idPassword": {
+    "message": "Password"
+  },
+  "idPhone": {
+    "message": "Telefono"
+  },
+  "idAddress": {
+    "message": "Indirizzo"
+  },
+  "idBirthDate": {
+    "message": "Data di nascita"
+  },
+  "idCompany": {
+    "message": "Azienda"
+  },
+  "idCf": {
+    "message": "Codice fiscale"
+  },
+  "idPiva": {
+    "message": "Partita IVA"
+  },
+  "idIban": {
+    "message": "IBAN"
+  },
+  "idCard": {
+    "message": "Carta di test"
+  },
+  "localeIt": {
+    "message": "Italiano"
+  },
+  "localeEnUS": {
+    "message": "Inglese (USA)"
+  },
+  "localeEnGB": {
+    "message": "Inglese (UK)"
+  },
+  "optTitle": {
+    "message": "Opzioni di Form Filler"
+  },
+  "optSaved": {
+    "message": "Salvato"
+  },
+  "optSecData": {
+    "message": "Dati generati"
+  },
+  "optLocale": {
+    "message": "Lingua dei dati"
+  },
+  "optLocaleHelp": {
+    "message": "\"Auto\" usa la lingua della pagina (attributo lang, dominio e testo visibile)."
+  },
+  "optLocaleAuto": {
+    "message": "Rilevamento automatico"
+  },
+  "optFallback": {
+    "message": "Se la lingua non è rilevabile"
+  },
+  "optFallbackBrowser": {
+    "message": "Lingua del browser"
+  },
+  "optEmailTemplate": {
+    "message": "Modello email"
+  },
+  "optEmailTemplateHelp": {
+    "message": "Segnaposto: {first} {last} {initial} {n} (2 cifre) {rand} (5 caratteri) {ts} (timestamp). Esempio: io+{rand}@tuodominio.it"
+  },
+  "optPassword": {
+    "message": "Password fissa"
+  },
+  "optPasswordHelp": {
+    "message": "Lascia vuoto per generare una password robusta casuale (visibile nel popup)."
+  },
+  "optKeepIdentity": {
+    "message": "Mantieni la stessa identità tra una compilazione e l'altra (moduli a più passaggi)"
+  },
+  "optSecBehaviour": {
+    "message": "Comportamento"
+  },
+  "optOverwrite": {
+    "message": "Sovrascrivi i campi che hanno già un valore"
+  },
+  "optIncludeHidden": {
+    "message": "Compila anche i campi invisibili (può attivare gli honeypot)"
+  },
+  "optCheckboxes": {
+    "message": "Caselle di controllo"
+  },
+  "optCheckboxAll": {
+    "message": "Seleziona tutte"
+  },
+  "optCheckboxRequired": {
+    "message": "Solo obbligatorie e consenso/privacy"
+  },
+  "optCheckboxRandom": {
+    "message": "Casuale (obbligatorie e consenso sempre selezionate)"
+  },
+  "optAttachFiles": {
+    "message": "Allega un file di esempio ai campi file (PNG/JPG/GIF/PDF/TXT… in base ad \"accept\")"
+  },
+  "optContentEditable": {
+    "message": "Compila gli editor di testo formattato (contenteditable)"
+  },
+  "optHighlight": {
+    "message": "Evidenzia i campi compilati (verde = riconosciuto, arancione = generico, blu = regola personalizzata)"
+  },
+  "optDebug": {
+    "message": "Mostra nella console della pagina i tipi di campo rilevati"
+  },
+  "optSecRules": {
+    "message": "Regole personalizzate"
+  },
+  "optRulesHelp": {
+    "message": "Una regola per riga: regex = valore. La regex viene confrontata (senza distinzione maiuscole/minuscole) con etichetta, name, id e placeholder del campo. I valori possono usare {firstName} {lastName} {fullName} {email} {phone} {username} {password} {city} {cap} {street} {company} {cf} {piva} {iban} {today} {n} {rand}. Usa {skip} per ignorare un campo, true/false per le caselle. Le righe che iniziano con # sono commenti."
+  },
+  "optReset": {
+    "message": "Ripristina predefiniti"
+  },
+  "optResetConfirm": {
+    "message": "Ripristinare tutte le opzioni ai valori predefiniti?"
+  },
+  "optShortcuts": {
+    "message": "Scorciatoie da tastiera"
+  },
+  "optShortcutsHelp": {
+    "message": "Alt+Shift+F compila la pagina, Alt+Shift+E compila il modulo attivo. Modificale in chrome://extensions/shortcuts (Firefox: Componenti aggiuntivi → ⚙ → Gestisci scorciatoie)."
+  },
+  "popupNoFocus": {
+    "message": "Prima clicca su un campo del modulo nella pagina"
+  },
+  "idPin": {
+    "message": "PIN"
+  },
+  "idMemorable": {
+    "message": "Parola segreta"
+  },
+  "idBeneficiary": {
+    "message": "Beneficiario"
+  },
+  "idBeneficiaryIban": {
+    "message": "IBAN beneficiario"
+  },
+  "optSimulateTyping": {
+    "message": "Simula la digitazione reale (eventi tastiera per carattere) per campi con maschere o controlli, es. siti bancari. I campi che rifiutano un valore diretto vengono comunque riprovati così."
+  }
+}

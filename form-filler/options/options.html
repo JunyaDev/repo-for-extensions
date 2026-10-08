@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form Filler</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <header>
+      <img src="../icons/icon48.png" alt="" width="32" height="32">
+      <h1 data-i18n="optTitle">Form Filler options</h1>
+      <span id="saved" class="saved" data-i18n="optSaved" hidden>Saved</span>
+    </header>
+
+    <section>
+      <h2 data-i18n="optSecData">Generated data</h2>
+      <div class="field">
+        <label for="locale" data-i18n="optLocale">Data language</label>
+        <select id="locale" data-setting="locale">
+          <option value="auto" data-i18n="optLocaleAuto">Auto-detect</option>
+          <option value="it" data-i18n="localeIt">Italian</option>
+          <option value="en-US" data-i18n="localeEnUS">English (US)</option>
+          <option value="en-GB" data-i18n="localeEnGB">English (UK)</option>
+        </select>
+        <p class="help" data-i18n="optLocaleHelp"></p>
+      </div>
+      <div class="field">
+        <label for="fallbackLocale" data-i18n="optFallback">When the language can't be detected</label>
+        <select id="fallbackLocale" data-setting="fallbackLocale">
+          <option value="browser" data-i18n="optFallbackBrowser">Browser language</option>
+          <option value="it" data-i18n="localeIt">Italian</option>
+          <option value="en-US" data-i18n="localeEnUS">English (US)</option>
+          <option value="en-GB" data-i18n="localeEnGB">English (UK)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="emailTemplate" data-i18n="optEmailTemplate">Email template</label>
+        <input id="emailTemplate" data-setting="emailTemplate" type="text" spellcheck="false">
+        <p class="help" data-i18n="optEmailTemplateHelp"></p>
+      </div>
+      <div class="field">
+        <label for="fixedPassword" data-i18n="optPassword">Fixed password</label>
+        <input id="fixedPassword" data-setting="fixedPassword" type="text" spellcheck="false" autocomplete="off">
+        <p class="help" data-i18n="optPasswordHelp"></p>
+      </div>
+      <label class="check"><input type="checkbox" data-setting="keepIdentity"> <span data-i18n="optKeepIdentity"></span></label>
+    </section>
+
+    <section>
+      <h2 data-i18n="optSecBehaviour">Behaviour</h2>
+      <label class="check"><input type="checkbox" data-setting="overwrite"> <span data-i18n="optOverwrite"></span></label>
+      <label class="check"><input type="checkbox" data-setting="includeHidden"> <span data-i18n="optIncludeHidden"></span></label>
+      <label class="check"><input type="checkbox" data-setting="attachFiles"> <span data-i18n="optAttachFiles"></span></label>
+      <label class="check"><input type="checkbox" data-setting="fillContentEditable"> <span data-i18n="optContentEditable"></span></label>
+      <label class="check"><input type="checkbox" data-setting="simulateTyping"> <span data-i18n="optSimulateTyping"></span></label>
+      <label class="check"><input type="checkbox" data-setting="highlight"> <span data-i18n="optHighlight"></span></label>
+      <label class="check"><input type="checkbox" data-setting="debug"> <span data-i18n="optDebug"></span></label>
+      <div class="field">
+        <label for="checkboxMode" data-i18n="optCheckboxes">Checkboxes</label>
+        <select id="checkboxMode" data-setting="checkboxMode">
+          <option value="all" data-i18n="optCheckboxAll">Check all</option>
+          <option value="required" data-i18n="optCheckboxRequired">Only required and consent boxes</option>
+          <option value="random" data-i18n="optCheckboxRandom">Random</option>
+        </select>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-i18n="optSecRules">Custom rules</h2>
+      <p class="help" data-i18n="optRulesHelp"></p>
+      <textarea id="customRules" data-setting="customRules" rows="8" spellcheck="false"
+        placeholder="# esempi / examples&#10;coupon|codice sconto = TEST10&#10;codice (cliente|utente) = CL-{n}{rand}&#10;newsletter = false&#10;^note$ = {skip}"></textarea>
+    </section>
+
+    <section>
+      <h2 data-i18n="optShortcuts">Keyboard shortcuts</h2>
+      <p class="help" data-i18n="optShortcutsHelp"></p>
+    </section>
+
+    <footer>
+      <button id="reset" type="button" data-i18n="optReset">Reset to defaults</button>
+    </footer>
+  </main>
+  <script src="../shared/settings.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
