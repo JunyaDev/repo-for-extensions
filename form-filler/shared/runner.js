@@ -7,6 +7,7 @@ const FF_CONTENT_FILES = [
   'content/rules.js',
   'content/samples.js',
   'content/filler.js',
+  'content/flutter.js',
 ];
 
 /**
@@ -41,7 +42,12 @@ async function ffExecute(tabId, request = {}) {
     if (settings.locale === 'auto' && request.frameId == null) {
       const [top] = await ffApi.scripting.executeScript({
         target: { tabId, frameIds: [0] },
-        func: (s) => (globalThis.__FF && globalThis.__FF.detectLocale ? globalThis.__FF.detectLocale(s) : null),
+        // Flutter pages have no readable text until their accessibility tree is on: they detect it themselves.
+        func: (s) => {
+          const FF = globalThis.__FF;
+          if (!FF || !FF.detectLocale || (FF.flutter && FF.flutter.detect())) return null;
+          return FF.detectLocale(s);
+        },
         args: [settings],
       });
       if (top && top.result) settings.locale = top.result;

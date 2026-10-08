@@ -3,7 +3,7 @@
 (() => {
   const params = new URLSearchParams(location.search);
   if (!params.has('harness')) return;
-  const files = ['core', 'data', 'generators', 'rules', 'samples', 'filler'];
+  const files = ['core', 'data', 'generators', 'rules', 'samples', 'filler', 'flutter'];
   const allFields = (root, out = []) => {
     root.querySelectorAll('input, select, textarea').forEach((e) => out.push(e));
     root.querySelectorAll('*').forEach((e) => e.shadowRoot && allFields(e.shadowRoot, out));

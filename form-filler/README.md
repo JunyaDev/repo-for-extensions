@@ -66,6 +66,19 @@ CAP/province/phone prefix matching the city, …):
 The PIN, memorable word and beneficiary (name + IBAN) are shown in the popup. `test/banking.html` covers all of the
 above.
 
+### Flutter web apps
+
+Flutter draws its UI on a canvas, so a Flutter page has no form fields in the DOM: only the field you clicked gets a
+hidden `<input>`. On Flutter pages the extension therefore switches on Flutter's accessibility tree (the hidden
+"Enable accessibility" button, as screen readers do; invisible, stays on until reload), which exposes every field
+with its label. Fields are then filled one at a time: focus → wait until Flutter connects the field → set the value,
+so the value reaches the app's state (not only the screen). Checkboxes, switches and radios are clicked; dropdowns are
+opened and an item is picked (by label, or by recognising the options, e.g. province codes). Nothing is left focused.
+
+Limits: only fields Flutter has built are reachable (long lazy lists: scroll first); date-picker dialogs and fully
+custom widgets without accessibility info are not handled. Filling is sequential (a few hundred ms per field).
+`test/flutter-app` is a Flutter test app.
+
 Field handling respects `type`, `maxlength`, `minlength`, `min`/`max`/`step` and `pattern` (if the value doesn't
 match, a matching string is generated from the regex). Selects and radio groups pick the option matching the
 identity (province, country, gender, birth day/month/year, card expiry…) or a random valid one; consent/privacy
@@ -104,11 +117,13 @@ content/generators.js identity + codice fiscale / P.IVA / IBAN / phones + per-fi
 content/rules.js      IT+EN keyword rules and autocomplete mapping → field type
 content/samples.js    sample upload files
 content/filler.js     field discovery, label extraction, classification, value setting
+content/flutter.js    Flutter web support (accessibility tree, sequential focus-and-fill)
 content/track.js      remembers the right-clicked element (for "Fill this form/field")
 popup/, options/      UI (English and Italian via _locales)
 test/test-form.html   test page (IT/EN forms, iframe, shadow DOM, constraints)
 test/banking.html     banking test page (transfers, pagoPA/F24, mortgage, KYC, keypad, UK payee, split fields)
 test/harness.js       headless harness used by both test pages
+test/flutter-app/     Flutter web test app (source)
 ```
 
 `test/test-form.html?harness&seed=42&locale=en-US` (or `banking.html?harness&typing=1`) runs the filler directly in the page (no extension needed) and

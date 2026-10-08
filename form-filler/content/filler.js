@@ -64,6 +64,8 @@
       /* ignore */
     }
     sample += ' ' + [...document.querySelectorAll('[placeholder]')].slice(0, 60).map((e) => e.getAttribute('placeholder')).join(' ');
+    // Canvas UIs (Flutter) expose their labels only as aria-label.
+    sample += ' ' + deepQueryAll(document, '[aria-label]').slice(0, 80).map((e) => e.getAttribute('aria-label')).join(' ');
     let it = /\.it$/.test(host) ? 3 : 0;
     let en = 0;
     for (const w of FF.normalize(sample).split(' ')) {
@@ -1017,9 +1019,18 @@
     });
   }
 
+  // Shared with content/flutter.js
+  FF.dom = {
+    deepQueryAll, deepActiveElement, describe, textOf, sectionHeading, nativeSetter, highlight, toList, finalizeText,
+    finalizeNumber, firstNumber, matchOption, isNegativeOption, coerceId, resolveContext, parseCustomRules, matchCustom,
+    parseBool, CONSENT_RE, POSITIVE_RE, NEGATED_STATEMENT_RE, BENEFICIARY_RE,
+  };
+
   // ---------- Main ----------
 
   FF.run = function (opts = {}) {
+    // Flutter web draws on a canvas: handled by content/flutter.js (asynchronous, returns a Promise).
+    if (FF.flutter && FF.flutter.detect()) return FF.flutter.run(opts);
     const settings = { ...(opts.settings || {}) };
     const result = { filled: 0, skipped: 0, total: 0, frame: location.href, top: window === window.top };
     const scope = resolveScope(opts.scope || 'page');
