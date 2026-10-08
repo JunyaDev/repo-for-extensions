@@ -440,8 +440,42 @@
       el.dispatchEvent(new KeyboardEvent('keyup', base));
     }
     fire(el, 'change');
-    blurEvents(el);
+    if (el.getRootNode().activeElement === el) el.blur();
+    else blurEvents(el);
   }
+
+  const UNLOCKABLE = new Set(['text', 'email', 'tel', 'password', 'url', 'search', 'number', 'textarea']);
+
+  /** Anti-autofill trick: `readonly` until focused (onfocus="this.removeAttribute('readonly')"). */
+  function unlockReadonly(el, kind) {
+    if (!el.readOnly) return true;
+    if (!UNLOCKABLE.has(kind)) return false;
+    focusEvents(el);
+    if (!el.readOnly) return true;
+    try {
+      el.focus({ preventScroll: true });
+    } catch (e) {
+      /* ignore */
+    }
+    return !el.readOnly;
+  }
+
+  /** Put focus and scroll back where the user had them (typing simulation focuses each field in turn). */
+  FF.settleFocus = function () {
+    const st = FF.focusState;
+    if (!st) return;
+    const cur = deepActiveElement();
+    try {
+      if (st.el && st.el !== document.body && st.el !== document.documentElement && st.el.isConnected) {
+        if (cur !== st.el) st.el.focus({ preventScroll: true });
+      } else if (cur && cur !== document.body && cur.blur) {
+        cur.blur();
+      }
+    } catch (e) {
+      /* ignore */
+    }
+    if (window.scrollX !== st.x || window.scrollY !== st.y) window.scrollTo(st.x, st.y);
+  };
 
   // ---------- On-screen PIN keypads ----------
 
@@ -449,6 +483,8 @@
   function findKeypad(el) {
     let node = parentOf(el);
     for (let d = 0; d < 6 && node && node !== document.documentElement; d++, node = parentOf(node)) {
+      // The keypad must belong to this field: stop once the container holds other fields too.
+      if (node.querySelectorAll('input:not([type=hidden]):not([type=button]), select, textarea').length > 1) return null;
       const keys = new Map();
       for (const k of node.querySelectorAll('button, [role="button"], a, td, li, span, div, input[type="button"]')) {
         if (k === el || k.querySelector('input, select, textarea')) continue;
@@ -989,7 +1025,7 @@
     const scope = resolveScope(opts.scope || 'page');
     if (!scope) return { ...result, inactive: true };
     const els = collect(scope, settings);
-    const prevActive = deepActiveElement();
+    FF.focusState = { el: deepActiveElement(), x: window.scrollX, y: window.scrollY };
 
     if (opts.action === 'clear') {
       for (const el of els) {
@@ -1076,9 +1112,10 @@
     for (const f of fields) {
       const { el, kind } = f;
       result.total++;
-      // Read-only PIN field driven by an on-screen keypad: click the digits.
+      const lockedOut = el.readOnly && kind !== 'select' && !(DATE_IDS.has(f.id) && !el.value) && !unlockReadonly(el, kind);
+      // PIN field driven by an on-screen keypad (read-only, or no virtual keyboard): click the digits.
       const secretLike = ['otp', 'secretChar', 'customerNumber'].includes(f.id) || kind === 'password';
-      if (secretLike && (el.readOnly || el.getAttribute('inputmode') === 'none')) {
+      if (secretLike && (lockedOut || el.getAttribute('inputmode') === 'none')) {
         const keys = findKeypad(el);
         if (keys) {
           const kctx = makeCtx(f);
@@ -1092,7 +1129,7 @@
           }
         }
       }
-      if (el.readOnly && kind !== 'select' && !(DATE_IDS.has(f.id) && !el.value)) {
+      if (lockedOut) {
         result.skipped++;
         log(f, '(read-only)', 'skip');
         continue;
@@ -1208,14 +1245,7 @@
       }
     }
 
-    // Contenteditable filling moves focus; put it back.
-    if (prevActive && prevActive !== deepActiveElement() && prevActive.focus) {
-      try {
-        prevActive.focus({ preventScroll: true });
-      } catch (e) {
-        /* ignore */
-      }
-    }
+    FF.settleFocus();
 
     if (settings.debug) {
       console.groupCollapsed(`[Form Filler] ${result.filled}/${result.total} fields · ${locale} · ${location.href}`);

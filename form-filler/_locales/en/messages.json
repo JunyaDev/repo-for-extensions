@@ -215,9 +215,6 @@
   "optShortcutsHelp": {
     "message": "Alt+Shift+F fills the page, Alt+Shift+E fills the focused form. Change them in chrome://extensions/shortcuts (Firefox: Add-ons → ⚙ → Manage Extension Shortcuts)."
   },
-  "popupNoFocus": {
-    "message": "Click into a form field on the page first"
-  },
   "idPin": {
     "message": "PIN"
   },

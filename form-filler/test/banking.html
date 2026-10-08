@@ -107,6 +107,9 @@
 <form id="login">
   <h2>Accesso</h2>
   <div class="row"><label for="cc">Codice cliente</label><input id="cc" name="codice_cliente"></div>
+  <!-- anti-autofill trick: read-only until the field receives focus -->
+  <div class="row"><label for="usr">Nome utente</label><input id="usr" name="utente" readonly onfocus="this.removeAttribute('readonly')"></div>
+  <div class="row"><label for="pwd">Password</label><input id="pwd" name="password" type="password" readonly onfocus="this.removeAttribute('readonly')"></div>
   <div class="row"><label for="pin">PIN</label><input id="pin" name="pin" type="password" readonly>
     <div class="keypad" id="keypad"></div>
   </div>

@@ -25,7 +25,17 @@ async function ffExecute(tabId, request = {}) {
     ts = Date.now();
   }
   const target = request.frameId != null ? { tabId, frameIds: [request.frameId] } : { tabId, allFrames: true };
+  const run = async (scope) => {
+    const results = await ffApi.scripting.executeScript({
+      target,
+      func: (opts) => (globalThis.__FF && globalThis.__FF.run ? globalThis.__FF.run(opts) : null),
+      args: [{ action, scope, seed, ts, settings }],
+    });
+    return (results || []).map((r) => r && r.result).filter((r) => r && !r.inactive);
+  };
   try {
+    // Start from fresh code: tabs opened before an extension update would otherwise keep the old version.
+    await ffApi.scripting.executeScript({ target, func: () => { delete globalThis.__FF; } });
     await ffApi.scripting.executeScript({ target, files: FF_CONTENT_FILES });
     // One identity per fill: detect the language in the top frame and reuse it in every iframe (payment iframes etc.).
     if (settings.locale === 'auto' && request.frameId == null) {
@@ -36,12 +46,16 @@ async function ffExecute(tabId, request = {}) {
       });
       if (top && top.result) settings.locale = top.result;
     }
-    const results = await ffApi.scripting.executeScript({
-      target,
-      func: (opts) => (globalThis.__FF && globalThis.__FF.run ? globalThis.__FF.run(opts) : null),
-      args: [{ action, scope: request.scope || 'page', seed, ts, settings }],
-    });
-    const frames = (results || []).map((r) => r && r.result).filter((r) => r && !r.inactive);
+    let frames = await run(request.scope || 'page');
+    // "Focused form" with no field focused anywhere: fill the whole page instead of doing nothing.
+    if (request.scope === 'focused' && !frames.length) frames = await run('page');
+    // Typing into iframes moves focus into them; hand it back to where the user was in the top page.
+    if (request.frameId == null) {
+      await ffApi.scripting.executeScript({
+        target: { tabId, frameIds: [0] },
+        func: () => globalThis.__FF && globalThis.__FF.settleFocus && globalThis.__FF.settleFocus(),
+      }).catch(() => {});
+    }
     const summary = {
       ok: true,
       action,

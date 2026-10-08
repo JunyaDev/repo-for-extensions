@@ -215,9 +215,6 @@
   "optShortcutsHelp": {
     "message": "Alt+Shift+F compila la pagina, Alt+Shift+E compila il modulo attivo. Modificale in chrome://extensions/shortcuts (Firefox: Componenti aggiuntivi → ⚙ → Gestisci scorciatoie)."
   },
-  "popupNoFocus": {
-    "message": "Prima clicca su un campo del modulo nella pagina"
-  },
   "idPin": {
     "message": "PIN"
   },

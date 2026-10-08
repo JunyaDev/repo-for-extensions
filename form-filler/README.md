@@ -16,7 +16,7 @@ realistic **test data chosen from the field's meaning** — its label, `name`/`i
 | Action | How |
 | --- | --- |
 | Fill every field on the page (all frames) | `Alt+Shift+F`, popup *Fill page*, or right-click → *Fill all fields on this page* |
-| Fill only the form you're in | `Alt+Shift+E`, popup *Focused form*, or right-click → *Fill this form* |
+| Fill only the form you're in (whole page if no field is focused) | `Alt+Shift+E`, popup *Focused form*, or right-click → *Fill this form* |
 | Fill a single field | right-click the field → *Fill this field* |
 | Clear | popup *Clear*, or right-click → *Clear this form* |
 
@@ -72,8 +72,9 @@ identity (province, country, gender, birth day/month/year, card expiry…) or a 
 boxes are always accepted. Values are set through native setters with `input`/`change`/`blur` events so React,
 Vue, Angular and jQuery validators see them. Open shadow DOM and iframes are covered.
 
-Skipped on purpose: hidden/off-screen fields (honeypots), disabled and read-only fields (except empty date pickers),
-CAPTCHA fields.
+Skipped on purpose: hidden/off-screen fields (honeypots), disabled and read-only fields, CAPTCHA fields. Exceptions:
+empty date pickers, and fields that are read-only only until focused (a common anti-autofill trick) are filled.
+Focus and scroll position are restored after every fill.
 
 ## Options
 

@@ -61,9 +61,7 @@ async function run(request) {
       setStatus(t('popupError'), 'err');
       return;
     }
-    if (request.scope === 'focused' && !res.frames) {
-      setStatus(t('popupNoFocus'));
-    } else if (!res.total) {
+    if (!res.total) {
       setStatus(t('popupNoFields'));
     } else {
       let msg = res.action === 'clear'
