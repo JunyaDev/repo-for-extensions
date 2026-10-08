@@ -9,13 +9,25 @@
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
     "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "128": "icons/icon128.png",
+    "200": "icons/icon200.png"
   },
-  "permissions": ["activeTab", "scripting", "storage", "contextMenus"],
-  "host_permissions": ["<all_urls>"],
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "background": {
     "service_worker": "background.js",
-    "scripts": ["shared/settings.js", "shared/runner.js", "background.js"]
+    "scripts": [
+      "shared/settings.js",
+      "shared/runner.js",
+      "background.js"
+    ]
   },
   "action": {
     "default_title": "__MSG_extName__",
@@ -32,8 +44,12 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content/track.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/track.js"
+      ],
       "run_at": "document_start",
       "all_frames": true,
       "match_about_blank": true
@@ -41,11 +57,15 @@
   ],
   "commands": {
     "fill-page": {
-      "suggested_key": { "default": "Alt+Shift+F" },
+      "suggested_key": {
+        "default": "Alt+Shift+F"
+      },
       "description": "__MSG_cmdFillPage__"
     },
     "fill-form": {
-      "suggested_key": { "default": "Alt+Shift+E" },
+      "suggested_key": {
+        "default": "Alt+Shift+E"
+      },
       "description": "__MSG_cmdFillForm__"
     },
     "clear-page": {
