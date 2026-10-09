@@ -1,0 +1,25 @@
+// Optional Gradle build (if you have Gradle installed).
+// Equivalent to build.sh: compiles against montoya-api (provided at runtime),
+// produces a thin jar containing only this extension's classes + resources.
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // compileOnly: Burp supplies the Montoya API at runtime, so it is not bundled.
+    compileOnly 'net.portswigger.burp.extensions:montoya-api:2025.12'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+jar {
+    archiveFileName = 'doc-injection-tester.jar'
+}

